@@ -1,4 +1,4 @@
-json.date do
+json.data do
   json.managers @managers do |manager|
     json.id manager.id
     json.name manager.nome
