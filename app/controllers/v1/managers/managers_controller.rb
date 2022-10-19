@@ -12,7 +12,9 @@ module V1
         @manager = Manager.new(manager_params)
         @manager.encrypted_password = @password
 
-        render :bad_request, status: :bad_request and return unless @manager.inactive!
+        render :bad_request, status: :bad_request and return unless @manager.active!
+
+        SendNotificationSmsJob.perform_later(@manager, @password)
         render :new_manager, status: :created
       end
 
