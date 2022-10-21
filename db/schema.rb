@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_21_104532) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_21_190539) do
   create_table "managers", force: :cascade do |t|
     t.string "email"
     t.string "name"
@@ -18,6 +18,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_21_104532) do
     t.string "token_auth"
     t.string "cellphone"
     t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
+    t.string "cellphone"
+    t.integer "status"
+    t.integer "otp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

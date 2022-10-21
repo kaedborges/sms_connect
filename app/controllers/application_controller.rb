@@ -18,9 +18,19 @@ class ApplicationController < ActionController::API
         header = header.split(' ').last if header
         begin
             @decoded = decode_token(header)
-            puts @decoded['user_id']
-            @current_manager = Manager.find_by(id: @decoded['user_id'])
-            # @current_user = Manager.find(decoded[:user_id])
+            @current_manager = Manager.find_by(id: @decoded['manager_id'])
+        rescue ActiveRecord::RecordNotFound => e
+            render :unauthorized, status: :unauthorized
+        rescue JWT::DecodeError => e
+            render :unauthorized, status: :unauthorized
+        end
+    end
+    def validate_user_token
+        header = request.headers['Authorization']
+        header = header.split(' ').last if header
+        begin
+            @decoded = decode_token(header)
+            @current_user = User.find_by(id: @decoded['user_id'])
         rescue ActiveRecord::RecordNotFound => e
             render :unauthorized, status: :unauthorized
         rescue JWT::DecodeError => e
