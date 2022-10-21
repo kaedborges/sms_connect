@@ -1,13 +1,16 @@
 module V1
   module Users
     class UsersController < ApplicationController
-      def index
-        puts 'ola'
+      before_action :validate_user_token
+
+      def show
+        @current_user
+        render :user, status: :ok
       end
 
-      def new
+      private
 
-      end
+      def set_user; end
     end
   end
 end

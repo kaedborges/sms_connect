@@ -32,7 +32,7 @@ Rails.application.routes.draw do
       #Session
       post        '/sessions'                                                     => 'sessions#new'
       #Users
-      get         '/'                                                             => 'users#index'
+      get         '/'                                                             => 'users#show'
 
 
     end
