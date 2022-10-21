@@ -2,7 +2,7 @@ class SendNotificationSmsJob < ApplicationJob
   queue_as :default
 
   def perform(manager, password)
-    @message = "Teste"
-    SendSmsBackboneServices.new.send_sms(manager.cellphone, @message, "Kaedcode")
+    message = "Hi #{manager.name}, Your Account was created, password is #{password}"
+    SendSmsBackboneServices.new.send_sms(manager.cellphone, message, "KAEDCODE")
   end
 end

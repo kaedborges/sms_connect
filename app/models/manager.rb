@@ -1,6 +1,5 @@
 class Manager < ApplicationRecord
-  #acts_as_token_authenticatable
-  #devise :database_authenticatable, :recoverable, :rememberable, :validatable
+  has_secure_password
 
   enum status: { inactive: 0, active: 1}, _default: :inactive
 end

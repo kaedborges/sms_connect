@@ -1,14 +1,17 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
   namespace :v1 do
     namespace :managers do
-      
       #Session
-      post          'sessions'                  => 'sessions#new'
-
+      post          '/sessions'                  => 'sessions#new'
       #Managers
       get           '/'                         => 'managers#index'
       post          '/'                         => 'managers#new'
+      delete        '/:id'                      => 'managers#destroy'
+      get           '/:id'                      => 'managers#show'
+      patch         '/:id/reset-password'       => 'managers#reset_manager_password'
+      patch         '/:id/lock'                 => 'managers#lock'
+      patch         '/:id/onlock'               => 'managers#unlock'
     end
   end
 end

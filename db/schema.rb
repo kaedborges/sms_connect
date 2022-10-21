@@ -10,17 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_18_130839) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_21_104532) do
   create_table "managers", force: :cascade do |t|
     t.string "email"
-    t.string "encrypted_password"
+    t.string "name"
+    t.integer "status"
+    t.string "token_auth"
     t.string "cellphone"
-    t.string "nome"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "status"
-    t.integer "authentication_token"
-    t.index ["authentication_token"], name: "index_managers_on_authentication_token", unique: true
   end
 
 end
