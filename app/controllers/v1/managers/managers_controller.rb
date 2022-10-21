@@ -3,7 +3,7 @@ module V1
     class ManagersController < ApplicationController
       before_action :random_password, only: :new
       before_action :validate_manager_token
-      # before_action :set_manager, only: %i[destroy]
+      before_action :set_manager, only: %i[destroy new reset_manager_password]
 
       def index
         @managers = Manager.all#.where({status: 1})
@@ -19,6 +19,16 @@ module V1
 
         SendNotificationSmsJob.perform_later(@manager, @password)
         render :new_manager, status: :created
+      end
+
+      def reset_manager_password
+        render :bad_request, status: :bad_request and return if @current_manager == @manager
+        @manager.password = @password
+        @manager.password_confirmation = @password
+
+        render :bad_request, status: :bad_request and return unless @manager.update
+        SendNotificationSmsJob.perform_later(@manager, @password)
+        head :no_content
       end
 
       def show
@@ -47,7 +57,6 @@ module V1
       end
       def set_manager
         @manager = Manager.find(params[:id])
-        render :not_found, status: :not_found and return unless @manager.nil?
       end
     end
   end

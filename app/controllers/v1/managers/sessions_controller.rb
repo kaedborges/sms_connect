@@ -1,7 +1,6 @@
 module V1
   module Managers
     class SessionsController < ApplicationController
-      before_action :set_manager, only: %i[new]
 
       def new
         @manager = Manager.find_by(email: params[:email])
@@ -18,10 +17,6 @@ module V1
           })
         @time = Time.now + 24.hours.to_i
         render :token_session, status: :ok
-
-      end
-
-      def set_manager
 
       end
 
