@@ -50,12 +50,10 @@ module V1
       end
 
       def show
-        @manager = Manager.find(params[:id])
         render :list_manager, status: :ok
       end
 
       def destroy
-        @manager = Manager.find(params[:id])
         pp @manager
         if @manager.nil?
           render :not_found, status: :not_found

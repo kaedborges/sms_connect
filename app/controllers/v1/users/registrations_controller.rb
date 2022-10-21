@@ -21,17 +21,14 @@ module V1
 
       def confirmation
         @user = User.find_by(cellphone: params[:cellphone])
+
         render :invalid_number_or_password, status: :bad_request and return if @user.nil?
-
-        render :bad_request, status: :bad_request and return if @user.active?
-
+        render :bad_request, status: :bad_request and return unless @user.active?
         render :bad_request, status: :bad_request and return unless @user.cellphone == params[:cellphone]
-
-        render :bad_request, status: :bad_request and return unless @user.otp == params[:otp]
-
+        render :bad_request, status: :bad_request and return unless @user.otp.to_i == params[:otp].to_i
         render :bad_request, status: :bad_request and return unless @user.active!
 
-        render 'v1/users/sessions/session', status: :created
+        head :created
       end
 
       private

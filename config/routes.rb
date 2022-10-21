@@ -4,6 +4,16 @@ Rails.application.routes.draw do
     namespace :managers do
       #Session
       post          '/sessions'                                                   => 'sessions#new'
+
+      #Users
+      get           '/users/all'                                                  => 'users#index'
+      post          '/users/create'                                               => 'users#new'
+      delete        '/users/:id/user'                                             => 'users#destroy'
+      get           '/users/:id/user'                                             => 'users#show'
+      patch         '/users/:id/reset-password'                                   => 'users#reset_manager_password'
+      patch         '/users/:id/lock'                                             => 'users#lock'
+      patch         '/users/:id/onlock'                                           => 'users#unlock'
+
       #Managers
       get           '/'                                                           => 'managers#index'
       post          '/'                                                           => 'managers#new'
@@ -12,6 +22,8 @@ Rails.application.routes.draw do
       patch         '/:id/reset-password'                                         => 'managers#reset_manager_password'
       patch         '/:id/lock'                                                   => 'managers#lock'
       patch         '/:id/onlock'                                                 => 'managers#unlock'
+
+
     end
     namespace :users do
       # Registrations
