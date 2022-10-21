@@ -11,7 +11,7 @@ module V1
 
         @token = encode_token(
           {
-              user_id: @manager.id,
+              manager_id: @manager.id,
               email: @manager.email,
               status: @manager.status
           })

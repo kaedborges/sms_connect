@@ -4,6 +4,10 @@ module V1
       def index
         puts 'ola'
       end
+
+      def new
+
+      end
     end
   end
 end

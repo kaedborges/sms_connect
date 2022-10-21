@@ -45,6 +45,7 @@ gem "bootsnap", require: false
 gem 'httparty'
 gem 'rest-client'
 gem 'jwt'
+gem 'phonelib'
 
 
 group :development, :test do
