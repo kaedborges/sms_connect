@@ -3,7 +3,7 @@ module V1
     class SessionsController < ApplicationController
 
       def new
-        @user = User.find_by(email: params[:email])
+        @user = User.find_by(cellphone: params[:cellphone])
         render :invalid_credentials, status: :unauthorized and return if @user.nil?
         puts @user.email
         puts @user.authenticate(params[:password])
