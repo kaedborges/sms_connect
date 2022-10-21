@@ -33,6 +33,7 @@ Rails.application.routes.draw do
       post        '/sessions'                                                     => 'sessions#new'
       #Users
       get         '/'                                                             => 'users#show'
+      put         '/'                                                             => 'users#update'
 
 
     end
