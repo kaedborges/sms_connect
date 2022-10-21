@@ -3,7 +3,7 @@ module V1
     class ManagersController < ApplicationController
       before_action :random_password, only: :new
       before_action :validate_manager_token
-      before_action :set_manager, only: %i[destroy new reset_manager_password]
+      before_action :set_manager, only: %i[destroy new reset_manager_password unlock lock]
 
       def index
         @managers = Manager.all#.where({status: 1})
@@ -22,13 +22,31 @@ module V1
       end
 
       def reset_manager_password
-        render :bad_request, status: :bad_request and return if @current_manager == @manager
+        render :manager_service_unavailable, status: :bad_request and return if @current_manager == @manager
         @manager.password = @password
         @manager.password_confirmation = @password
 
         render :bad_request, status: :bad_request and return unless @manager.update
         SendNotificationSmsJob.perform_later(@manager, @password)
         head :no_content
+      end
+
+      def lock
+        render :manager_service_unavailable, status: :forbidden and return if @current_manager == @manager
+        head :accepted and return if @manager.inactive?
+
+        @manager.inactive!
+
+        head :accepted
+      end
+
+
+      def unlock
+        render :manager_service_unavailable, status: :forbidden and return if @current_manager == @manager
+        head :accepted and return if @manager.active?
+
+        @manager.active!
+        head :accepted
       end
 
       def show

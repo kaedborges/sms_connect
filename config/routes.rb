@@ -9,7 +9,9 @@ Rails.application.routes.draw do
       post          '/'                         => 'managers#new'
       delete        '/:id'                      => 'managers#destroy'
       get           '/:id'                      => 'managers#show'
-      post          '/:id/reset-password'       => 'managers#reset_manager_password'
+      patch         '/:id/reset-password'       => 'managers#reset_manager_password'
+      patch         '/:id/lock'                 => 'managers#lock'
+      patch         '/:id/onlock'               => 'managers#unlock'
     end
   end
 end
