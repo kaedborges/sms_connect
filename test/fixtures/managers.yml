@@ -2,12 +2,16 @@
 
 one:
   email: MyString
-  encrypted_password: MyString
+  name: MyString
+  status: 1
+  token_auth: MyString
   cellphone: MyString
-  nome: MyString
+  password_digest: MyString
 
 two:
   email: MyString
-  encrypted_password: MyString
+  name: MyString
+  status: 1
+  token_auth: MyString
   cellphone: MyString
-  nome: MyString
+  password_digest: MyString

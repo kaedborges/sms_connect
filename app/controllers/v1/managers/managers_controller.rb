@@ -2,6 +2,8 @@ module V1
   module Managers
     class ManagersController < ApplicationController
       before_action :random_password, only: :new
+      before_action :validate_manager_token
+      # before_action :set_manager, only: %i[destroy]
 
       def index
         @managers = Manager.all
@@ -10,7 +12,8 @@ module V1
 
       def new
         @manager = Manager.new(manager_params)
-        @manager.encrypted_password = @password
+        @manager.password = @password
+        @manager.password_confirmation = @password
 
         render :bad_request, status: :bad_request and return unless @manager.active!
 
@@ -18,10 +21,28 @@ module V1
         render :new_manager, status: :created
       end
 
+      def destroy
+        @manager = Manager.find(params[:id])
+        pp @manager
+        if @manager.nil?
+          render :not_found, status: :not_found
+        else
+          @manager.destroy
+          head :no_content
+        end
+
+
+        # Manager.destroy(@manager)
+      end
+
       private
 
       def manager_params
-        params.permit(:nome, :email, :cellphone)
+        params.permit(:name, :email, :cellphone)
+      end
+      def set_manager
+        @manager = Manager.find(params[:id])
+        render :not_found, status: :not_found and return unless @manager.nil?
       end
     end
   end
