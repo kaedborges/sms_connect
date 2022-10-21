@@ -13,5 +13,11 @@ Rails.application.routes.draw do
       patch         '/:id/lock'                 => 'managers#lock'
       patch         '/:id/onlock'               => 'managers#unlock'
     end
+    namespace :users do
+      #Session
+      post          '/sessions'                  => 'sessions#new'
+      #Users
+      get           '/'                          => 'users#index'
+    end
   end
 end
