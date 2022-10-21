@@ -6,7 +6,7 @@ module V1
       # before_action :set_manager, only: %i[destroy]
 
       def index
-        @managers = Manager.all
+        @managers = Manager.all#.where({status: 1})
         render :list_managers, status: :ok
       end
 
@@ -19,6 +19,11 @@ module V1
 
         SendNotificationSmsJob.perform_later(@manager, @password)
         render :new_manager, status: :created
+      end
+
+      def show
+        @manager = Manager.find(params[:id])
+        render :list_manager, status: :ok
       end
 
       def destroy

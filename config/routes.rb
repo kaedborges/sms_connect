@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get           '/'                         => 'managers#index'
       post          '/'                         => 'managers#new'
       delete        '/:id'                      => 'managers#destroy'
+      get           '/:id'                      => 'managers#show'
     end
   end
 end
