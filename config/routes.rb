@@ -31,9 +31,14 @@ Rails.application.routes.draw do
       post        'registrations/confirmation'                                    =>  'registrations#confirmation'
       #Session
       post        '/sessions'                                                     => 'sessions#new'
+
       #Users
       get         '/'                                                             => 'users#show'
       put         '/'                                                             => 'users#update'
+
+      #Users
+      get         '/credit/balance'                                               => 'credits#show_balance'
+      get         '/creadit/all-transation'                                       => 'credits#show_transatio'
 
 
     end
