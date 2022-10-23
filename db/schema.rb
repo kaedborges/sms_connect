@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_23_214217) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_23_222939) do
   create_table "credits_histories", force: :cascade do |t|
     t.integer "balance"
     t.string "operation"
@@ -36,6 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_23_214217) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "pattern"
   end
 
   create_table "user_credits", force: :cascade do |t|
