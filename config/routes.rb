@@ -23,6 +23,12 @@ Rails.application.routes.draw do
       patch         '/:id/lock'                                                   => 'managers#lock'
       patch         '/:id/onlock'                                                 => 'managers#unlock'
 
+      #Credits
+      get           '/credits/global'                                             => 'credits#global'
+      get           '/credits/user/:id'                                           => 'credits#user_credits'
+      post          '/credits/user/:id/add'                                       => 'credits#user_add'
+      post          '/credits/user/:id/remove'                                    => 'credits#user_remove'
+
 
     end
     namespace :users do
