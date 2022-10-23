@@ -25,9 +25,10 @@ Rails.application.routes.draw do
 
       #Credits
       get           '/credits/global'                                             => 'credits#global'
-      get           '/credits/user/:id'                                           => 'credits#user_credits'
+      get           '/credits/user/:id'                                           => 'credits#user_credit'
       post          '/credits/user/:id/add'                                       => 'credits#user_add'
       post          '/credits/user/:id/remove'                                    => 'credits#user_remove'
+      get          '/credits/user/:id/all'                                        => 'credits#user_credits'
 
 
     end
