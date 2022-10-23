@@ -9,7 +9,7 @@ module V1
       end
 
       def show_transatio
-        @credits = UserCredit.where(user:@current_user)
+        @credits = CreditsHistory.where(user:@current_user)
         render :credits, status: :ok
       end
 
