@@ -1,0 +1,2 @@
+class CreditsHistory < ApplicationRecord
+end
