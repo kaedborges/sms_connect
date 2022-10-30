@@ -18,7 +18,17 @@ class SendSmsBackboneServices
   end
 
   def credit
-    responde = RestClient.get("#{@base_uri}credit?token=#{@token_mimo}")
-    return responde.body
+    response = RestClient.get("#{@base_uri}credit?token=#{@token_mimo}")
+    return response.body
+  end
+
+  def sender
+    get_responde('sender-id/list-all').body
+  end
+
+  private
+
+  def get_responde(url)
+    RestClient.get("#{@base_uri}#{url}?token=#{@token_mimo}")
   end
 end

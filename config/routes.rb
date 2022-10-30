@@ -28,7 +28,16 @@ Rails.application.routes.draw do
       get           '/credits/user/:id'                                           => 'credits#user_credit'
       post          '/credits/user/:id/add'                                       => 'credits#user_add'
       post          '/credits/user/:id/remove'                                    => 'credits#user_remove'
-      get          '/credits/user/:id/all'                                        => 'credits#user_credits'
+      get           '/credits/user/:id/all'                                       => 'credits#user_credits'
+
+      #Senders
+      get           '/senders/all'                                                => 'senders#all_sender'
+      get           '/senders/:id'                                                => 'senders#show'
+      get           '/senders/user/:id'                                           => 'senders#show_user'
+      patch         '/senders/default'                                            => 'senders#set_default'
+      patch         '/senders/update'                                             => 'senders#update'
+      post          '/senders/user/:id'                                           => 'senders#new_user'
+      delete        '/senders/user/:id'                                           => 'senders#destroy_user'
 
 
     end

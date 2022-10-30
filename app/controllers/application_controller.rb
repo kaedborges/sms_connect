@@ -42,5 +42,9 @@ class ApplicationController < ActionController::API
         chars = ('0'..'9').to_a + ('A'..'Z').to_a + ('a'..'z').to_a
         @password = chars.sort_by { rand }.join[0...length]
         @password
-      end
+    end
+
+    def not_found
+        render :not_found, status: :not_found
+    end
 end
