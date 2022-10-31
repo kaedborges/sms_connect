@@ -31,14 +31,16 @@ Rails.application.routes.draw do
       get           '/credits/user/:id/all'                                       => 'credits#user_credits'
 
       #Senders
-      get           '/senders/all'                                                => 'senders#all_sender'
+      get           '/senders/all'                                                => 'senders#index'
       get           '/senders/:id'                                                => 'senders#show'
-      get           '/senders/user/:id'                                           => 'senders#show_user'
       patch         '/senders/default'                                            => 'senders#set_default'
       patch         '/senders/update'                                             => 'senders#update'
-      post          '/senders/user/:id'                                           => 'senders#new_user'
-      delete        '/senders/user/:id'                                           => 'senders#destroy_user'
 
+
+      #Sender Users
+      get           '/senders/user/:id'                                           => 'sender_users#show'
+      post          '/senders/user/:id'                                           => 'sender_users#new'
+      delete        '/senders/:id/user/:user_id'                                  => 'sender_users#destroy'
 
     end
     namespace :users do
