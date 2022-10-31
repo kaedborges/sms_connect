@@ -5,8 +5,7 @@ module V1
       before_action :set_user, only: %i[new show]
 
       def show
-        @userSender = SenderUser.where(user_id: @user.id)
-        render :not_found, status: :not_found and return if @userSender.nil?
+        render :not_found, status: :not_found and return if @user.nil?
 
         render :show_user, status: :ok
       end
