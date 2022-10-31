@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_30_214458) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_31_114158) do
   create_table "credits_histories", force: :cascade do |t|
     t.integer "balance"
     t.string "operation"
@@ -29,6 +29,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_30_214458) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "sender_requests", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "name"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "reason"
+    t.index ["name"], name: "index_sender_requests_on_name", unique: true
+    t.index ["user_id"], name: "index_sender_requests_on_user_id"
   end
 
   create_table "sender_users", force: :cascade do |t|
@@ -70,6 +81,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_30_214458) do
   end
 
   add_foreign_key "credits_histories", "users"
+  add_foreign_key "sender_requests", "users"
   add_foreign_key "sender_users", "senders"
   add_foreign_key "sender_users", "users"
   add_foreign_key "user_credits", "users"

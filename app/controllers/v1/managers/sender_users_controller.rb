@@ -2,7 +2,7 @@ module V1
   module Managers
     class SenderUsersController < ApplicationController
       before_action :validate_manager_token
-      before_action :set_user, only: %i[new show]
+      before_action :set_user, only: %i[new show set_sender_inprogress]
 
       def show
         render :not_found, status: :not_found and return if @user.nil?
@@ -30,6 +30,13 @@ module V1
         pp @userSender
         SenderUser.delete(@userSender)
         head :no_content
+      end
+
+      def set_sender_inprogress
+        @senderRequested = SenderRequest.find_by('LOWER(name)= ? and user_id = ?', params[:sender].to_s.downcase, @user.id)
+        head :accepted and return if @senderRequested.progress?
+
+        head :accepted and return @senderRequested.progress!
       end
 
       private

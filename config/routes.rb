@@ -54,9 +54,13 @@ Rails.application.routes.draw do
       get         '/'                                                             => 'users#show'
       put         '/'                                                             => 'users#update'
 
-      #Users
+      #credits
       get         '/credit/balance'                                               => 'credits#show_balance'
       get         '/creadit/all-transation'                                       => 'credits#show_transatio'
+
+      #credits
+      get         '/senders/'                                                     => 'senders#index'
+      post        '/senders/request'                                              => 'senders#new'
 
 
     end

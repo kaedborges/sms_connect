@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   has_many :sender_users
   has_many :user_credits
+  has_many :sender_requests
 
   enum status: { inactive: 0, active: 1}, _default: :inactive
 

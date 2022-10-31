@@ -8,6 +8,10 @@ module V1
         @senders = Sender.all
       end
 
+      def sender_requested
+        @senderRequested = SenderRequest.where(status: 0)
+      end
+
       def show
         render :not_found, status: :not_found and return if @sender.nil?
 
