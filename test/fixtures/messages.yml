@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  sender: one
+  text: MyText
+  size: 1
+  parts: 1
+  flag: false
+
+two:
+  user: two
+  sender: two
+  text: MyText
+  size: 1
+  parts: 1
+  flag: false

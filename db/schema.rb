@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_31_114158) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_03_094417) do
   create_table "credits_histories", force: :cascade do |t|
     t.integer "balance"
     t.string "operation"
@@ -29,6 +29,28 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_114158) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "sender_id", null: false
+    t.text "text"
+    t.integer "size"
+    t.integer "parts"
+    t.boolean "flag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "recipients", force: :cascade do |t|
+    t.integer "message_id", null: false
+    t.string "phone"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_recipients_on_message_id"
   end
 
   create_table "sender_requests", force: :cascade do |t|
@@ -81,6 +103,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_114158) do
   end
 
   add_foreign_key "credits_histories", "users"
+  add_foreign_key "messages", "senders"
+  add_foreign_key "messages", "users"
+  add_foreign_key "recipients", "messages"
   add_foreign_key "sender_requests", "users"
   add_foreign_key "sender_users", "senders"
   add_foreign_key "sender_users", "users"
