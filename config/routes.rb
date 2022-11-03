@@ -32,14 +32,17 @@ Rails.application.routes.draw do
 
       #Senders
       get           '/senders/all'                                                => 'senders#index'
+      get           '/senders /request'                                           => 'senders#sender_requested'
       get           '/senders/:id'                                                => 'senders#show'
       patch         '/senders/default'                                            => 'senders#set_default'
+      patch         '/senders/default'                                            => 'senders#request_Sender'
       patch         '/senders/update'                                             => 'senders#update'
 
 
       #Sender Users
       get           '/senders/user/:id'                                           => 'sender_users#show'
       post          '/senders/user/:id'                                           => 'sender_users#new'
+      patch         '/senders/user/:id/update-status'                             => 'sender_users#set_sender_inprogress'
       delete        '/senders/:id/user/:user_id'                                  => 'sender_users#destroy'
 
     end

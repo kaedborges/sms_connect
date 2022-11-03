@@ -12,6 +12,11 @@ module V1
         @senderRequested = SenderRequest.where(status: 0)
       end
 
+      def request_Sender
+        SendSmsBackboneServices.new.add_sender(params[:sender], params[:reason])
+        head :accepted
+      end
+
       def show
         render :not_found, status: :not_found and return if @sender.nil?
 
@@ -23,6 +28,11 @@ module V1
         senders.map do |s|
           sender = Sender.find_by(name: s['sender'])
           Sender.create(name: s['sender'], status: 0, pattern: false) if sender.nil?
+          @senderR = SenderRequest.find_by('LOWER(name)= ?', s['sender'].to_s.downcase)
+          unless @senderR.nil?
+            @senderR.approved!
+            SenderUser.create(user_id: @senderR.user.id, sender_id: sender.id, status: 1)
+          end
         end
       end
 
