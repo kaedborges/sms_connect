@@ -19,6 +19,7 @@ gem 'rest-client'
 gem 'jwt'
 gem 'phonelib'
 gem 'whenever', require: false
+gem 'due_sms_counter'
 
 
 group :development, :test do

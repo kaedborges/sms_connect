@@ -1,6 +1,10 @@
 class User < ApplicationRecord
   has_secure_password
 
+  has_many :sender_users
+  has_many :user_credits
+  has_many :sender_requests
+
   enum status: { inactive: 0, active: 1}, _default: :inactive
 
   validates :cellphone, presence: { message: 'CELLPHONE_IS_REQUIRED' }

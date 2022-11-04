@@ -8,7 +8,7 @@ class SendSmsBackboneServices
     @token_mimo = '2ae7b2e6b39ea7e9689784dff8789488927878988'
   end
 
-  def send_sms(number,text,sender)
+  def send_sms(number, text, sender)
     payload = {
       :sender => sender,
       :recipients => number,
@@ -18,7 +18,25 @@ class SendSmsBackboneServices
   end
 
   def credit
-    responde = RestClient.get("#{@base_uri}credit?token=#{@token_mimo}")
-    return responde.body
+    response = RestClient.get("#{@base_uri}credit?token=#{@token_mimo}")
+    return response.body
+  end
+
+  def sender
+    get_responde('sender-id/list-all').body
+  end
+
+  def add_sender(sender, reason)
+    payload = {
+      sender: sender,
+      reason: reason
+    }
+    RestClient.post("#{@base_uri}ender-id/request?token=#{@token_mimo}", payload.to_json, { content_type: :json, accept: :json })
+  end
+
+  private
+
+  def get_responde(url)
+    RestClient.get("#{@base_uri}#{url}?token=#{@token_mimo}")
   end
 end

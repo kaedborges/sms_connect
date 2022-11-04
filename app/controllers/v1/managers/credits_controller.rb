@@ -1,6 +1,7 @@
 module V1
   module Managers
     class CreditsController < ApplicationController
+      before_action :validate_manager_token
       before_action :set_user, only: %i[user_credits user_add user_remove]
 
       def global
