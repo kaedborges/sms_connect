@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_03_094417) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_04_232004) do
   create_table "credits_histories", force: :cascade do |t|
     t.integer "balance"
     t.string "operation"
@@ -40,6 +40,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_03_094417) do
     t.boolean "flag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "gataway_id"
+    t.index ["gataway_id"], name: "index_messages_on_gataway_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
@@ -47,7 +49,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_03_094417) do
   create_table "recipients", force: :cascade do |t|
     t.integer "message_id", null: false
     t.string "phone"
-    t.integer "status"
+    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["message_id"], name: "index_recipients_on_message_id"
