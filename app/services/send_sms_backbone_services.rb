@@ -14,12 +14,18 @@ class SendSmsBackboneServices
       :recipients => number,
       :text => text
     }
-    RestClient.post("#{@base_uri}message/send?token=#{@token_mimo}", payload.to_json, { content_type: :json, accept: :json })
+    response = RestClient.post("#{@base_uri}message/send?token=#{@token_mimo}", payload.to_json, { content_type: :json, accept: :json })
+    return response.body
+  end
+
+  def details_sms(gataway_id)
+    response = RestClient.get("#{@base_uri}message/list-one?token=#{@token_mimo}&id=#{gataway_id}")
+    response.body
   end
 
   def credit
     response = RestClient.get("#{@base_uri}credit?token=#{@token_mimo}")
-    return response.body
+    response.body
   end
 
   def sender
@@ -31,7 +37,8 @@ class SendSmsBackboneServices
       sender: sender,
       reason: reason
     }
-    RestClient.post("#{@base_uri}ender-id/request?token=#{@token_mimo}", payload.to_json, { content_type: :json, accept: :json })
+    RestClient.post("#{@base_uri}ender-id/request?token=#{@token_mimo}", payload.to_json,
+                    { content_type: :json, accept: :json })
   end
 
   private
